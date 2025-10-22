@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GRC Payroll Program</title>
+  <style>
+    body {
+      background-color: #ff8383;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    .container {
+      background-color: #ff4949;
+      border: 3px solid black;
+      border-radius: 15px;
+      padding: 50px;
+      width: 320px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: hsl(0, 96%, 18%);
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid black;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid black;
+      background-color: lightgray;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #d3d3d3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>GRC PAYROLL PROGRAM</h1>
+
+    <label>ID NUMBER</label>
+    <input type="text" id="idnum">
+
+    <label>LAST NAME</label>
+    <input type="text" id="lname">
+
+    <label>FIRST NAME</label>
+    <input type="text" id="fname">
+
+    <label>MIDDLE NAME</label>
+    <input type="text" id="mname">
+
+    <label>POSITION</label>
+    <input type="text" id="position">
+
+    <label>RATE</label>
+    <input type="number" id="rate">
+
+    <label>WORK DAYS</label>
+    <input type="number" id="days">
+
+    <button onclick="compute()">SUBMIT</button>
+  </div>
+
+  <script>
+    function compute() {
+      const data = {
+        id: document.getElementById("idnum").value,
+        lname: document.getElementById("lname").value,
+        fname: document.getElementById("fname").value,
+        mname: document.getElementById("mname").value,
+        position: document.getElementById("position").value,
+        rate: parseFloat(document.getElementById("rate").value),
+        days: parseFloat(document.getElementById("days").value)
+      };
+      localStorage.setItem("payrollData", JSON.stringify(data));
+      window.location.href = "display.html";
+    }
+  </script>
+</body>
+</html>

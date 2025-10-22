@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payroll Program</title>
+  <style>
+    body {
+      background-color: #444;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: black;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      border: 3px solid black;
+      width: 400px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .section {
+      margin: 20px 0;
+    }
+
+    .deductions {
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    b {
+      font-weight: bold;
+    }
+
+    .netpay {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PAYROLL PROGRAM</h1>
+    <div class="section">
+      <b>ID:</b> <span id="idnum"></span><br>
+      <b>NAME:</b> <span id="fullname"></span><br>
+      <b>POSITION:</b> <span id="position"></span><br><br>
+
+      <b>RATE:</b> <span id="rate"></span><br>
+      <b>DAYS:</b> <span id="days"></span><br><br>
+      <b>GROSS PAY:</b> <span id="gross"></span>
+    </div>
+
+    <div class="deductions">
+      <b>DEDUCTIONS</b><br>
+      SSS(5%): <span id="sss"></span><br>
+      PAG-IBIG(3%): <span id="pagibig"></span><br>
+      PHILHEALTH(2%): <span id="philhealth"></span><br>
+      TAX(5%): <span id="tax"></span><br><br>
+      <b>TOTAL DEDUCTION:</b> <span id="total"></span>
+    </div>
+
+    <div class="netpay">
+      <b>NET PAY:</b> <span id="netpay"></span>
+    </div>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem("payrollData"));
+
+    if (data) {
+      const gross = data.rate * data.days;
+      const sss = gross * 0.05;
+      const pagibig = gross * 0.03;
+      const philhealth = gross * 0.02;
+      const tax = gross * 0.05;
+      const total = sss + pagibig + philhealth + tax;
+      const net = gross - total;
+
+      document.getElementById("idnum").textContent = data.id;
+      document.getElementById("fullname").textContent = `${data.lname}, ${data.fname} ${data.mname}`;
+      document.getElementById("position").textContent = data.position;
+      document.getElementById("rate").textContent = data.rate.toFixed(2);
+      document.getElementById("days").textContent = data.days;
+      document.getElementById("gross").textContent = gross.toFixed(2);
+      document.getElementById("sss").textContent = sss.toFixed(2);
+      document.getElementById("pagibig").textContent = pagibig.toFixed(2);
+      document.getElementById("philhealth").textContent = philhealth.toFixed(2);
+      document.getElementById("tax").textContent = tax.toFixed(2);
+      document.getElementById("total").textContent = total.toFixed(2);
+      document.getElementById("netpay").textContent = net.toFixed(2);
+    }
+  </script>
+</body>
+</html>
